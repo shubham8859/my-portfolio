@@ -37,6 +37,9 @@
             height: auto; /* Adjust height to fit content */
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         .resume-card {
@@ -48,6 +51,7 @@
             border: 1px solid #e2e8f0;
             width: 100%;
             height: 100%;
+            flex: 1; /* Ensure the resume card takes up all available space */
         }
 
         @keyframes slideUp {
@@ -578,6 +582,16 @@
                 display: block;
             }
         }
+
+        .footer {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #6b7280;
+            padding: 10px 0;
+            background: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+            margin: 0; /* Remove any margin */
+        }
     </style>
     <script src="constants.js"></script>
 </head>
@@ -618,71 +632,16 @@
                 <aside class="sidebar">
                     <div class="section">
                         <h2 class="section-title">Technical Skills</h2>
-                        <div class="skills-grid">
-                            <div class="skill-category">
-                                <h4><i class="fas fa-code"></i> Languages</h4>
-                                <div class="skill-tags">
-                                    <span class="skill-tag">Python</span>
-                                    <span class="skill-tag">Java</span>
-                                    <span class="skill-tag">HTML</span>
-                                    <span class="skill-tag">CSS</span>
-                                    <span class="skill-tag">SCSS</span>
-                                    <span class="skill-tag">TypeScript</span>
-                                </div>
-                            </div>
-
-                            <div class="skill-category">
-                                <h4><i class="fas fa-cogs"></i> Frameworks</h4>
-                                <div class="skill-tags">
-                                    <span class="skill-tag">Spring Boot</span>
-                                    <span class="skill-tag">Angular</span>
-                                    <span class="skill-tag">Streamlit</span>
-                                </div>
-                            </div>
-
-                            <div class="skill-category">
-                                <h4><i class="fas fa-brain"></i> AI Frameworks</h4>
-                                <div class="skill-tags">
-                                    <span class="skill-tag">LangChain</span>
-                                    <span class="skill-tag">LangGraph</span>
-                                    <span class="skill-tag">CrewAI</span>
-                                    <span class="skill-tag">Google ADK</span>
-                                    <span class="skill-tag">MCP</span>
-                                </div>
-                            </div>
-
-                            <div class="skill-category">
-                                <h4><i class="fas fa-database"></i> Databases</h4>
-                                <div class="skill-tags">
-                                    <span class="skill-tag">PostgreSQL</span>
-                                    <span class="skill-tag">ChromaDB</span>
-                                    <span class="skill-tag">SQLite</span>
-                                    <span class="skill-tag">Redis</span>
-                                </div>
-                            </div>
-
-                            <div class="skill-category">
-                                <h4><i class="fas fa-tools"></i> DevOps & Tools</h4>
-                                <div class="skill-tags">
-                                    <span class="skill-tag">Docker</span>
-                                    <span class="skill-tag">Git</span>
-                                    <span class="skill-tag">REST APIs</span>
-                                    <span class="skill-tag">OAuth 2.0</span>
-                                    <span class="skill-tag">OIDC</span>
-                                </div>
-                            </div>
+                        <div class="skills-grid" id="skills-grid">
+                            <!-- Skills will be dynamically loaded here -->
                         </div>
                     </div>
 
                     <div class="section">
                         <h2 class="section-title">Education</h2>
-                        <div class="education">
-                            <div class="degree">Bachelor of Technology</div>
-                            <div class="school">Computer Science and Engineering</div>
-                            <div class="school">SRMS College of Engineering Technology and Research</div>
-                            <div class="school">Bareilly, Uttar Pradesh</div>
-                            <div class="school"><strong>May 2017 – May 2021</strong></div>
-                        </div>
+                        <ul class="achievements" id="education">
+                            <!-- Education will be dynamically loaded here -->
+                        </ul>
                     </div>
 
                     <div class="section">
@@ -703,160 +662,28 @@
                 <main class="content">
                     <section class="section">
                         <h2 class="section-title">Professional Summary</h2>
-                        <div class="summary">
-                            Highly accomplished and innovative AI & Full Stack Engineer with a strong background in Full Stack Development and 3+ years of experience specializing in Generative AI, AI Platform Development, and Conversational AI. Proven leader in designing, developing, and deploying cutting-edge AI solutions, with expertise in end-to-end project lifecycle management, team leadership, and advanced framework integration. Passionate about leveraging AI to drive business value and enhance user experiences.
+                        <div class="summary" id="summary">
+                            <!-- Summary will be dynamically loaded here -->
                         </div>
                     </section>
 
                     <section class="section">
                         <h2 class="section-title">Professional Experience</h2>
-                        
-                        <div class="experience-item">
-                            <div class="job-header">
-                                <div>
-                                    <div class="job-title">Senior Systems Engineer</div>
-                                    <div class="company">Applied AI Platform (Advanced Research Center) • Chandigarh</div>
-                                </div>
-                                <div class="job-duration">Feb 2024 – Present</div>
-                            </div>
-
-                            <div class="project-title">Agent Studio Platform</div>
-                            <ul class="achievements">
-                                <li>Led the development and architecture of an Agent Studio, a versatile platform supporting both pro-code and low-code/no-code agent creation, real-time testing, deployment, and log monitoring (Loki, LLM traces) internal/external APIs.</li>
-                                <li>Engineered and integrated complex workflow orchestration capabilities, enabling the creation of multi-agent and tool-based low-code solutions.</li>
-                                <li>Optimized deployment with Knative Service for agents and robust job scheduling, preventing system overload.</li>
-                                <li>Drove project success through development, code reviews, demos, and architectural design.</li>
-                            </ul>
-                            
-                            <div class="tech-highlights">
-                                <strong>Key Technologies:</strong> Python, Java, Spring Boot, Angular, Generative AI Frameworks (LangChain, LangGraph, CrewAI, Google ADK, MCP), Kubernetes, Knative Service
-                            </div>
-
-                            <div class="project-title">Generative AI Service</div>
-                            <ul class="achievements">
-                                <li>Designed and developed an Agentic System with advanced RAG and Chain of Thought, ensuring real-time processing and data privacy.</li>
-                                <li>Integrated the Agentic System with the Infosys Chatbot Platform, enhancing conversational intelligence.</li>
-                                <li>Innovated and showcased two key applications at <strong> Mobile World Congress </strong> and <strong>NVIDIA Summit 2024 </strong>:
-                                    <ul>     • Interviewing Agent: Streamlined candidate evaluation with AI-driven insights.</ul>
-                                    <ul>     • ITSM Agent: Automated IT service management tasks for improved efficiency.</ul>
-                                </li>
-                            </ul>
-                            
-                            <div class="tech-highlights">
-                                <strong>Key Technologies:</strong> Python, Streamlit, Generative AI Frameworks (LangChain, LangGraph, CrewAI), SpringBoot
-                            </div>
-                        </div>
-
-                        <div class="experience-item">
-                            <div class="job-header">
-                                <div>
-                                    <div class="job-title">Systems Engineer</div>
-                                    <div class="company">Infosys • Chandigarh</div>
-                                </div>
-                                <div class="job-duration">Feb 2022 – Feb 2024</div>
-                            </div>
-
-                            <div class="project-title">Infosys Chatbot Platform</div>
-                            <ul class="achievements">
-                                <li>Worked with a cross-functional team to successfully integrate Generative AI functionalities into the Infosys Chatbot Platform.</li>
-                                <li>Implemented document-based query processing and image analysis, achieving a processing time of 30-40 seconds for a normal 1-page document.</li>
-                            </ul>
-
-                            <div class="tech-highlights">
-                                <strong>Key Technologies:</strong> Python, Generative AI Frameworks, REST APIs, Kubernetes
-                            </div>
-
-                            <div class="project-title">Infosys Conversational AI Suite</div>
-                            <ul class="achievements">
-                                <li>Implemented OAuth 2.0 with OpenID Connect (OIDC) Authentication via Keycloak, enhancing platform security.</li>
-                                <li>Developed and integrated REST API Microservices to enable seamless communication between modules.</li>
-                            </ul>
-
-                            <div class="tech-highlights">
-                                <strong>Key Technologies:</strong> Keycloak, REST APIs, OAuth 2.0, OIDC
-                            </div>
-
-                            <div class="project-title">Conversational Testing Platform</div>
-                            <ul class="achievements">
-                                <li>Developed automated Test-Suite creation module via RESTful APIs, significantly reducing resource needs.</li>
-                                <li>Enabled generation of hundreds of thousands of test suites in 4-5 minutes.</li>
-                                <li>Managed and optimized underlying database structures to support rapid test suite generation.</li>
-                                <li>Designed REST API Microservices to handle test suite creation and execution workflows efficiently.</li>
-                            </ul>
-
-                            <div class="tech-highlights">
-                                <strong>Key Technologies:</strong> REST APIs, PostgreSQL, Python, Automation Frameworks
-                            </div>
+                        <div id="experience">
+                            <!-- Experience will be dynamically loaded here -->
                         </div>
                     </section>
                 </main>
             </div>
         </div>
-    </div>
-
-    <!-- Mobile Menu -->
-    <div class="mobile-menu">
-        <a href="#" id="menu-phone"><i class="fas fa-phone-alt"></i></a>
-        <a href="#" id="menu-email"><i class="fas fa-envelope"></i></a>
-        <a href="#" id="menu-linkedin" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-        <a href="#" id="menu-github" target="_blank"><i class="fab fa-github"></i></a>
-        <a href="#" id="menu-location" target="_blank"><i class="fas fa-map-marker-alt"></i></a>
-        <a href="Shubham Sharma Resume.pdf" download><i class="fas fa-download"></i></a>
+        <footer class="footer" id="footer">
+            <!-- Footer content will be dynamically loaded here -->
+        </footer>
     </div>
 
     <script>
-        // Add smooth scrolling and animations
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add hover effects to experience items
-            const experienceItems = document.querySelectorAll('.experience-item');
-            experienceItems.forEach(item => {
-                item.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-5px)';
-                });
-                item.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0)';
-                });
-            });
-
-            // Add click-to-copy functionality for contact info
-            const contactItems = document.querySelectorAll('.contact-item');
-            contactItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    const text = this.textContent.trim();
-                    if (navigator.clipboard && text.includes('@') || text.includes('+91')) {
-                        navigator.clipboard.writeText(text).then(() => {
-                            // Show copied feedback
-                            const original = this.innerHTML;
-                            this.innerHTML = '<i class="fas fa-check"></i> Copied!';
-                            setTimeout(() => {
-                                this.innerHTML = original;
-                            }, 2000);
-                        });
-                    }
-                });
-            });
-
-            // Intersection Observer for animation triggers
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, observerOptions);
-
-            // Observe all sections
-            document.querySelectorAll('.section').forEach(section => {
-                observer.observe(section);
-            });
-
-            // Load personal details dynamically
+        document.addEventListener('DOMContentLoaded', function () {
+            // Load personal details
             document.getElementById("name").textContent = PERSONAL_DETAILS.name;
             document.getElementById("title").textContent = PERSONAL_DETAILS.title;
 
@@ -878,14 +705,36 @@
             locationElement.href = PERSONAL_DETAILS.locationMap;
             locationElement.querySelector("span").textContent = PERSONAL_DETAILS.location;
 
-            // Load personal details dynamically for the mobile menu
-            document.getElementById("menu-phone").href = `tel:${PERSONAL_DETAILS.phone}`;
-            document.getElementById("menu-email").href = `mailto:${PERSONAL_DETAILS.email}`;
-            document.getElementById("menu-linkedin").href = PERSONAL_DETAILS.linkedin;
-            document.getElementById("menu-github").href = PERSONAL_DETAILS.github;
-            document.getElementById("menu-location").href = PERSONAL_DETAILS.locationMap;
+            // Load summary
+            document.getElementById("summary").textContent = PERSONAL_DETAILS.summary;
 
-            // Load Git Repositories dynamically
+            // Load skills
+            const skillsGrid = document.getElementById("skills-grid");
+            PERSONAL_DETAILS.skills.forEach(skillCategory => {
+                const categoryElement = document.createElement("div");
+                categoryElement.classList.add("skill-category");
+                categoryElement.innerHTML = `
+                    <h4><i class="${skillCategory.icon}"></i> ${skillCategory.name}</h4>
+                    <div class="skill-tags">
+                        ${skillCategory.skills.map(skill => `<span class="skill-tag">${skill}</span>`).join("")}
+                    </div>
+                `;
+                skillsGrid.appendChild(categoryElement);
+            });
+
+            // Load education
+            const educationContainer = document.getElementById("education");
+            PERSONAL_DETAILS.education.forEach(edu => {
+                const eduElement = document.createElement("li");
+                eduElement.innerHTML = `
+                    <strong>${edu.degree}</strong> in ${edu.field}<br>
+                    ${edu.institution}, ${edu.location}<br>
+                    <strong>${edu.duration}</strong>
+                `;
+                educationContainer.appendChild(eduElement);
+            });
+
+            // Load Git repositories
             const gitRepositoriesContainer = document.getElementById("git-repositories");
             PERSONAL_DETAILS.gitRepositories.forEach(repo => {
                 const repoElement = document.createElement("li");
@@ -896,7 +745,7 @@
                 gitRepositoriesContainer.appendChild(repoElement);
             });
 
-            // Load Certifications dynamically
+            // Load certifications
             const certificationsContainer = document.getElementById("certifications");
             PERSONAL_DETAILS.certifications.forEach(cert => {
                 const certElement = document.createElement("li");
@@ -907,12 +756,42 @@
                 `;
                 certificationsContainer.appendChild(certElement);
             });
-        });
 
-        // Print functionality
-        function downloadResume() {
-            window.print();
-        }
+            // Load experience
+            const experienceContainer = document.getElementById("experience");
+            PERSONAL_DETAILS.experience.forEach(job => {
+                const jobElement = document.createElement("div");
+                jobElement.classList.add("experience-item");
+                jobElement.innerHTML = `
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">${job.title}</div>
+                            <div class="company">${job.company} • ${job.location}</div>
+                        </div>
+                        <div class="job-duration">${job.duration}</div>
+                    </div>
+                    ${job.projects.map(project => `
+                        <div class="project-title">${project.name}</div>
+                        <ul class="achievements">
+                            ${project.achievements.map(achievement => `<li>${achievement}</li>`).join("")}
+                        </ul>
+                        <div class="tech-highlights">
+                            <strong>Key Technologies:</strong> ${project.technologies.join(", ")}
+                        </div>
+                    `).join("")}
+                `;
+                experienceContainer.appendChild(jobElement);
+            });
+
+            // Load footer with last updated date
+            const footerElement = document.getElementById("footer");
+            const lastUpdated = new Date().toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric"
+            });
+            footerElement.textContent = `© ${PERSONAL_DETAILS.name} ${new Date().getFullYear()} | Last Updated: ${lastUpdated}`;
+        });
     </script>
 </body>
 </html>
