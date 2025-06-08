@@ -23,17 +23,17 @@ const PERSONAL_DETAILS = {
         {
             name: "Infosys Python Developer",
             link: "",
-            description: ""
+            description: "Certification for Python development expertise."
         },
         {
             name: "Infosys Responsible AI Landscape",
             link: "",
-            description: ""
+            description: "Certification for understanding responsible AI practices."
         },
         {
             name: "Infosys AI Consumering Developer",
             link: "",
-            description: ""
+            description: "Certification for AI consumer applications."
         },
         {
             name: "Infosys AI Professional",
