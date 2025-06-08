@@ -3,486 +3,905 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shubham Sharma | AI & Full Stack Engineer</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <meta name="description" content="Shubham Sharma's professional resume showcasing expertise in AI, Full Stack Development, and Generative AI.">
-    <meta name="keywords" content="Shubham Sharma, Resume, AI Engineer, Full Stack Developer, Generative AI, Senior Systems Engineer">
-    <meta name="author" content="Shubham Sharma">
-    <meta property="og:title" content="Shubham Sharma | AI & Full Stack Engineer">
-    <meta property="og:description" content="Explore Shubham Sharma's professional resume, highlighting skills in AI, Full Stack Development, and Generative AI.">
-    <meta property="og:url" content="https://shubham-sharma-portfolio-yb0t.onrender.com">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="https://shubham-sharma-portfolio-yb0t.onrender.com/profile-image.jpg">
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Shubham Sharma",
-        "jobTitle": "AI & Full Stack Engineer",
-        "url": "https://shubham-sharma-portfolio-yb0t.onrender.com",
-        "sameAs": [
-            "https://www.linkedin.com/in/shubham-sharma-ss8859/",
-            "https://github.com/shubhamsharma"
-        ]
-    }
-    </script>
-
-    <!-- 
-    Chosen Palette: "Cool Neutral with Depth" - A refined palette utilizing a light slate background (#f8fafc) for overall calm, deep slate-800 (#1e293b) for primary text, and a vibrant blue-600 (#2563eb) as an accent. Shadows and subtle gradients are added for depth and professionalism, enhancing visual appeal without distracting.
-    -->
-    <!-- 
-    Application Structure Plan: The SPA now features a fixed header and a fixed navigation bar at the top of the viewport. The main content area below these fixed elements is a separate, vertically scrollable container with a white background. This design provides a persistent branding and navigation experience while allowing the user to explore the full resume content by scrolling within the designated area. The 'Experience' section retains its interactive vertical timeline, and the 'Skills' chart remains a dynamic visualization. This structure optimizes for a clear, concise, and easily navigable resume experience.
-    -->
-    <!-- 
-    Visualization & Content Choices: 
-    - Summary (Goal: Inform) -> Presented at the top of the scrollable content area ('About Me') for an immediate professional summary. Utilizes a clean card layout with subtle shadow.
-    - Experience (Goal: Organize/Detail) -> An interactive vertical timeline. Each role is a clickable item with a dynamic chevron icon that expands to reveal detailed responsibilities and key technologies, decluttering the initial view and encouraging deep-dives. Implemented with HTML/CSS/JS transitions.
-    - Skills (Goal: Compare/Inform) -> Skills are categorized and displayed as visually distinct, rounded tags. A responsive horizontal bar chart (Chart.js/Canvas) graphically illustrates experience levels in key technologies, providing a clear and engaging quantitative overview.
-    - Education (Goal: Inform) -> A clean, elevated card layout presents educational background with clear typography.
-    - CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. All visuals are built with structured HTML/CSS/Tailwind or rendered on a Canvas element by Chart.js.
-    -->
-
+    <title>Shubham Sharma</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        html, body {
-            height: 100%; /* Ensure html and body take full viewport height */
+        * {
             margin: 0;
-            overflow: hidden; /* Prevent body scroll, content will scroll within its container */
+            padding: 0;
+            box-sizing: border-box;
         }
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc; /* slate-50 for overall background */
-            color: #1e293b; /* slate-900 for primary text */
-            display: flex;
-            flex-direction: column; /* Stack fixed header/nav and scrollable content */
+
+        body, html {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.5;
+            font-size: 14px; /* Reduced font size */
+            color: #2c3e50;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            overflow-y: auto; /* Allow vertical scrolling */
         }
-        .nav-link {
-            transition: all 0.3s ease;
-            border-bottom: 3px solid transparent; /* Thicker border */
-            color: #64748b; /* slate-500 */
+
+        a {
+            text-decoration: none; /* Remove underline from all links */
         }
-        .nav-link:hover {
-            color: #2563eb; /* blue-600 */
-            border-bottom-color: #3b82f6; /* blue-500 */
+
+        a:hover {
+            text-decoration: none; /* Ensure no underline appears on hover */
         }
-        .nav-link.active {
-            border-bottom-color: #2563eb; /* blue-600 */
-            color: #1e293b; /* slate-900 */
-        }
-        /* Page sections for animations within the scrollable area */
-        .page-section {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-            background-color: #ffffff; /* White background for sections */
-            padding: 1.5rem; /* Adjusted from 2rem */
-            border-radius: 0.75rem; /* rounded-xl */
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl */
-        }
-        .page-section.visible { /* Class for triggering animation on scroll */
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .timeline-item .details {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.6s ease-in-out, padding 0.6s ease-in-out;
-            padding-top: 0;
-            padding-bottom: 0;
-        }
-        .timeline-item.open .details {
-            max-height: 1000px; /* Sufficiently large to reveal content */
-            padding-top: 0.75rem; /* Adjusted from 1rem */
-            padding-bottom: 0.25rem; /* Adjusted from 0.5rem */
-        }
-        .timeline-icon-rotate {
-            transition: transform 0.3s ease-in-out;
-        }
-        .timeline-item.open .timeline-icon-rotate {
-            transform: rotate(180deg);
-        }
-        .chart-container {
-            position: relative;
-            margin: auto;
-            height: 40vh; /* Adjusted from 45vh */
+
+        .container {
             width: 100%;
-            max-width: 900px; /* Fixed max-width for consistency */
-            max-height: 450px; /* Adjusted from 500px */
+            height: auto; /* Adjust height to fit content */
+            margin: 0;
+            padding: 0;
         }
-        .skill-tag {
-            background-color: #e0f2fe; /* sky-100 */
-            color: #0369a1; /* sky-800 */
-            border-radius: 9999px; /* rounded-full */
-            padding: 0.3rem 0.75rem; /* Adjusted from 0.375rem 0.875rem */
-            font-size: 0.8rem; /* Adjusted from 0.875rem */
-            font-weight: 500; /* font-medium */
-            transition: all 0.2s ease-in-out;
+
+        .resume-card {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            animation: slideUp 0.8s ease-out;
+            border: 1px solid #e2e8f0;
+            width: 100%;
+            height: 100%;
         }
-        .skill-tag:hover {
-            background-color: #93c5fd; /* blue-300 */
-            color: #1e40af; /* blue-900 */
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: white;
+            padding: 30px 20px; /* Reduced padding */
+            text-align: center;
+            position: relative;
+        }
+
+        .header::before {
+            display: none;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .name {
+            font-size: 2.5rem; /* Reduced font size */
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .title {
+            font-size: 1.2rem; /* Reduced font size */
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+
+        .header .download-btn {
+            display: none; /* Hide by default */
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #3b82f6;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .header .download-btn:hover {
+            background: #2563eb;
             transform: translateY(-2px);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+        }
+
+        @media (min-width: 769px) {
+            .header .download-btn {
+                display: inline-block; /* Show the download button in header for larger screens */
+            }
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            min-height: 40px;
+        }
+
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .contact-item i {
+            font-size: 16px;
+            width: 20px;
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .contact-item span {
+            font-size: 12px; /* Reduced font size */
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px; /* Reduced gap */
+            padding: 20px; /* Reduced padding */
+            width: 100%;
+        }
+
+        .sidebar {
+            background: #f8fafc;
+            padding: 20px; /* Reduced padding */
+            border-radius: 12px;
+            height: 100%;
+            border: 1px solid #e2e8f0;
+        }
+
+        .content {
+            padding: 10px; /* Reduced padding */
+            height: 100%;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            animation: fadeIn 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .section:nth-child(1) { animation-delay: 0.1s; }
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.3s; }
+        .section:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .section-title {
+            font-size: 1.5rem; /* Reduced font size */
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            position: relative;
+            padding-bottom: 8px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px; /* Reduced width */
+            height: 2px; /* Reduced height */
+            background: #3b82f6;
+            border-radius: 2px;
+        }
+
+        .summary {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid #3b82f6;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #374151;
+        }
+
+        .experience-item {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border: 1px solid #e5e7eb;
+            border-left: 6px solid #3b82f6;
+            transition: all 0.3s ease;
+        }
+
+        .experience-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+            border-left-color: #1d4ed8;
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .job-title {
+            font-size: 1.2rem; /* Reduced font size */
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .job-duration {
+            background: #3b82f6;
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem; /* Reduced font size */
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .company {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .project-title {
+            font-size: 1rem; /* Reduced font size */
+            font-weight: 600;
+            color: #3b82f6;
+            margin: 10px 0 8px 0;
+        }
+
+        .achievements {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .achievements li {
+            font-size: 0.9rem; /* Reduced font size */
+            padding: 6px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .achievements li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: #3b82f6;
+            font-weight: bold;
+        }
+
+        .skills-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .skill-category {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            border: 1px solid #e5e7eb;
+        }
+
+        .skill-category h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            background: #3b82f6;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .skill-tag:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        .education {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #f59e0b;
+        }
+
+        .degree {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .school {
+            color: #666;
+            margin: 5px 0;
+        }
+
+        .download-btn {
+            display: flex; /* Ensure the standalone download button is visible by default */
+        }
+
+        .tech-highlights {
+            background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border-left: 4px solid #8b5cf6;
+            font-size: 0.85rem; /* Reduced font size */
+        }
+
+        .tech-highlights strong {
+            color: #6b21a8;
+        }
+
+        .mobile-menu {
+            display: none; /* Hide the mobile menu by default */
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .main-content {
+                display: flex;
+                flex-direction: column; /* Stack sections vertically */
+            }
+
+            .content {
+                order: 1; /* Move main content (summary and experience) to the top */
+            }
+
+            .sidebar {
+                order: 2; /* Move sidebar (skills, education, etc.) below main content */
+            }
+
+            .header {
+                padding: 30px 20px;
+            }
+
+            .name {
+                font-size: 2.2rem;
+            }
+
+            .title {
+                font-size: 1.2rem;
+            }
+
+            .contact-info {
+                display: none; /* Hide contact links in the header for mobile */
+            }
+
+            .mobile-menu {
+                display: flex; /* Show the mobile menu only on mobile views */
+                position: fixed;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: #3b82f6;
+                color: white;
+                padding: 10px 20px;
+                border-radius: 50px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+                gap: 15px;
+                z-index: 1000;
+            }
+
+            .mobile-menu a {
+                color: white;
+                font-size: 1.2rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 40px;
+                height: 40px;
+                background: #1d4ed8;
+                border-radius: 50%;
+                transition: all 0.3s ease;
+            }
+
+            .mobile-menu a:hover {
+                background: #2563eb;
+                transform: scale(1.1);
+            }
+
+            .download-btn {
+                display: none; /* Hide the standalone download button on mobile views */
+            }
+
+            .contact-info {
+                gap: 10px;
+                justify-content: center;
+            }
+
+            .contact-item {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+                min-height: 36px;
+            }
+
+            .contact-item i {
+                font-size: 14px;
+                width: 16px;
+            }
+
+            .contact-item span {
+                font-size: 12px;
+            }
+
+            .job-header {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+
+            .job-title {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .sidebar {
+                padding: 20px;
+            }
+
+            .content {
+                padding: 0 10px;
+            }
+
+            .experience-item {
+                padding: 20px;
+            }
+
+            .skill-tags {
+                gap: 6px;
+            }
+
+            .skill-tag {
+                font-size: 0.75rem;
+                padding: 5px 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .name {
+                font-size: 1.8rem;
+            }
+
+            .title {
+                font-size: 1rem;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 8px;
+                align-items: center;
+            }
+
+            .contact-item {
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+            }
+
+            .main-content {
+                padding: 15px;
+            }
+
+            .section {
+                margin-bottom: 25px;
+            }
+        }
+
+        .print-styles {
+            display: none;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .resume-card {
+                box-shadow: none;
+                border-radius: 0;
+            }
+            .download-btn {
+                display: none;
+            }
+            .print-styles {
+                display: block;
+            }
         }
     </style>
+    <script src="constants.js"></script>
 </head>
-<body class="antialiased">
+<body>
+    <div class="container">
+        <div class="resume-card">
+            <header class="header">
+                <div class="header-content">
+                    <h1 class="name" id="name"></h1>
+                    <p class="title" id="title"></p>
+                    <a href="Shubham Sharma Resume.pdf" class="download-btn" download>Download Resume</a>
+                    <div class="contact-info">
+                        <a href="#" id="phone" class="contact-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <span></span>
+                        </a>
+                        <a href="#" id="email" class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span></span>
+                        </a>
+                        <a href="#" id="linkedin" class="contact-item" target="_blank">
+                            <i class="fab fa-linkedin-in"></i>
+                            <span>LinkedIn Profile</span>
+                        </a>
+                        <a href="#" id="github" class="contact-item" target="_blank">
+                            <i class="fab fa-github"></i>
+                            <span>GitHub Profile</span>
+                        </a>
+                        <a href="#" id="location" class="contact-item" target="_blank">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span></span>
+                        </a>
+                    </div>
+                </div>
+            </header>
 
-    <!-- Fixed Header -->
-    <header id="main-header" class="w-full bg-white shadow-lg p-4 sm:p-5 lg:p-6 rounded-b-xl flex-shrink-0">
-        <div class="container mx-auto max-w-7xl flex flex-col sm:flex-row justify-between items-start sm:items-center">
-            <div>
-                <h1 class="text-3xl font-extrabold text-slate-900 sm:text-4xl">Shubham Sharma</h1> <!-- Adjusted from text-4xl -->
-                <p class="text-lg text-blue-700 font-semibold mt-1 sm:text-xl">AI & Full Stack Engineer</p> <!-- Adjusted from text-xl -->
+            <div class="main-content">
+                <aside class="sidebar">
+                    <div class="section">
+                        <h2 class="section-title">Technical Skills</h2>
+                        <div class="skills-grid">
+                            <div class="skill-category">
+                                <h4><i class="fas fa-code"></i> Languages</h4>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">Python</span>
+                                    <span class="skill-tag">Java</span>
+                                    <span class="skill-tag">HTML</span>
+                                    <span class="skill-tag">CSS</span>
+                                    <span class="skill-tag">SCSS</span>
+                                    <span class="skill-tag">TypeScript</span>
+                                </div>
+                            </div>
+
+                            <div class="skill-category">
+                                <h4><i class="fas fa-cogs"></i> Frameworks</h4>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">Spring Boot</span>
+                                    <span class="skill-tag">Angular</span>
+                                    <span class="skill-tag">Streamlit</span>
+                                </div>
+                            </div>
+
+                            <div class="skill-category">
+                                <h4><i class="fas fa-brain"></i> AI Frameworks</h4>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">LangChain</span>
+                                    <span class="skill-tag">LangGraph</span>
+                                    <span class="skill-tag">CrewAI</span>
+                                    <span class="skill-tag">Google ADK</span>
+                                    <span class="skill-tag">MCP</span>
+                                </div>
+                            </div>
+
+                            <div class="skill-category">
+                                <h4><i class="fas fa-database"></i> Databases</h4>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">PostgreSQL</span>
+                                    <span class="skill-tag">ChromaDB</span>
+                                    <span class="skill-tag">SQLite</span>
+                                    <span class="skill-tag">Redis</span>
+                                </div>
+                            </div>
+
+                            <div class="skill-category">
+                                <h4><i class="fas fa-tools"></i> DevOps & Tools</h4>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">Docker</span>
+                                    <span class="skill-tag">Git</span>
+                                    <span class="skill-tag">REST APIs</span>
+                                    <span class="skill-tag">OAuth 2.0</span>
+                                    <span class="skill-tag">OIDC</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h2 class="section-title">Education</h2>
+                        <div class="education">
+                            <div class="degree">Bachelor of Technology</div>
+                            <div class="school">Computer Science and Engineering</div>
+                            <div class="school">SRMS College of Engineering Technology and Research</div>
+                            <div class="school">Bareilly, Uttar Pradesh</div>
+                            <div class="school"><strong>May 2017 – May 2021</strong></div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h2 class="section-title">Git Repositories</h2>
+                        <ul class="achievements" id="git-repositories">
+                            <!-- Git repositories will be dynamically loaded here -->
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <h2 class="section-title">Certifications</h2>
+                        <ul class="achievements" id="certifications">
+                            <!-- Certifications will be dynamically loaded here -->
+                        </ul>
+                    </div>
+                </aside>
+
+                <main class="content">
+                    <section class="section">
+                        <h2 class="section-title">Professional Summary</h2>
+                        <div class="summary">
+                            Highly accomplished and innovative AI & Full Stack Engineer with a strong background in Full Stack Development and 3+ years of experience specializing in Generative AI, AI Platform Development, and Conversational AI. Proven leader in designing, developing, and deploying cutting-edge AI solutions, with expertise in end-to-end project lifecycle management, team leadership, and advanced framework integration. Passionate about leveraging AI to drive business value and enhance user experiences.
+                        </div>
+                    </section>
+
+                    <section class="section">
+                        <h2 class="section-title">Professional Experience</h2>
+                        
+                        <div class="experience-item">
+                            <div class="job-header">
+                                <div>
+                                    <div class="job-title">Senior Systems Engineer</div>
+                                    <div class="company">Applied AI Platform (Advanced Research Center) • Chandigarh</div>
+                                </div>
+                                <div class="job-duration">Feb 2024 – Present</div>
+                            </div>
+
+                            <div class="project-title">Agent Studio Platform</div>
+                            <ul class="achievements">
+                                <li>Led the development and architecture of an Agent Studio, a versatile platform supporting both pro-code and low-code/no-code agent creation, real-time testing, deployment, and log monitoring (Loki, LLM traces) internal/external APIs.</li>
+                                <li>Engineered and integrated complex workflow orchestration capabilities, enabling the creation of multi-agent and tool-based low-code solutions.</li>
+                                <li>Optimized deployment with Knative Service for agents and robust job scheduling, preventing system overload.</li>
+                                <li>Drove project success through development, code reviews, demos, and architectural design.</li>
+                            </ul>
+                            
+                            <div class="tech-highlights">
+                                <strong>Key Technologies:</strong> Python, Java, Spring Boot, Angular, Generative AI Frameworks (LangChain, LangGraph, CrewAI, Google ADK, MCP), Kubernetes, Knative Service
+                            </div>
+
+                            <div class="project-title">Generative AI Service</div>
+                            <ul class="achievements">
+                                <li>Designed and developed an Agentic System with advanced RAG and Chain of Thought, ensuring real-time processing and data privacy.</li>
+                                <li>Integrated the Agentic System with the Infosys Chatbot Platform, enhancing conversational intelligence.</li>
+                                <li>Innovated and showcased two key applications at MWC and NVIDIA Summit 2024:
+                                    <ul>
+                                        <li>Interviewing Agent: Streamlined candidate evaluation with AI-driven insights.</li>
+                                        <li>ITSM Agent: Automated IT service management tasks for improved efficiency.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            
+                            <div class="tech-highlights">
+                                <strong>Key Technologies:</strong> Python, Streamlit, Generative AI Frameworks (LangChain, LangGraph, CrewAI), SpringBoot
+                            </div>
+                        </div>
+
+                        <div class="experience-item">
+                            <div class="job-header">
+                                <div>
+                                    <div class="job-title">Systems Engineer</div>
+                                    <div class="company">Infosys • Chandigarh</div>
+                                </div>
+                                <div class="job-duration">Feb 2022 – Feb 2024</div>
+                            </div>
+
+                            <div class="project-title">Infosys Chatbot Platform</div>
+                            <ul class="achievements">
+                                <li>Worked with a cross-functional team to successfully integrate Generative AI functionalities into the Infosys Chatbot Platform.</li>
+                                <li>Implemented document-based query processing and image analysis, achieving a processing time of 30-40 seconds for a normal 1-page document.</li>
+                            </ul>
+
+                            <div class="tech-highlights">
+                                <strong>Key Technologies:</strong> Python, Generative AI Frameworks, REST APIs, Kubernetes
+                            </div>
+
+                            <div class="project-title">Infosys Conversational AI Suite</div>
+                            <ul class="achievements">
+                                <li>Implemented OAuth 2.0 with OpenID Connect (OIDC) Authentication via Keycloak, enhancing platform security.</li>
+                                <li>Developed and integrated REST API Microservices to enable seamless communication between modules.</li>
+                            </ul>
+
+                            <div class="tech-highlights">
+                                <strong>Key Technologies:</strong> Keycloak, REST APIs, OAuth 2.0, OIDC
+                            </div>
+
+                            <div class="project-title">Conversational Testing Platform</div>
+                            <ul class="achievements">
+                                <li>Developed automated Test-Suite creation module via RESTful APIs, significantly reducing resource needs.</li>
+                                <li>Enabled generation of hundreds of thousands of test suites in 4-5 minutes.</li>
+                                <li>Managed and optimized underlying database structures to support rapid test suite generation.</li>
+                                <li>Designed REST API Microservices to handle test suite creation and execution workflows efficiently.</li>
+                            </ul>
+
+                            <div class="tech-highlights">
+                                <strong>Key Technologies:</strong> REST APIs, PostgreSQL, Python, Automation Frameworks
+                            </div>
+                        </div>
+                    </section>
+                </main>
             </div>
-            <div class="flex space-x-3 mt-3 sm:mt-0 items-center"> <!-- Adjusted from space-x-4 -->
-                <a href="mailto:shubhamsharma8859@gmail.com" class="text-slate-600 hover:text-blue-600 transition duration-300 transform hover:scale-110" aria-label="Email">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sm:h-7 sm:w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-                </a>
-                <a href="https://linkedin.com/in/shubhamsharma" target="_blank" rel="noopener noreferrer" class="text-slate-600 hover:text-blue-600 transition duration-300 transform hover:scale-110" aria-label="LinkedIn">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sm:h-7 sm:w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" /><circle cx="4" cy="4" r="2" stroke="none" fill="currentColor"/></svg>
-                </a>
-                <a href="https://github.com/shubhamsharma" target="_blank" rel="noopener noreferrer" class="text-slate-600 hover:text-blue-600 transition duration-300 transform hover:scale-110" aria-label="GitHub">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sm:h-7 sm:w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" /></svg>
-                </a>
-            </div>
-        </div>
-    </header>
-
-    <!-- Fixed Navigation -->
-    <nav id="main-nav" class="w-full bg-f8fafc pt-3 pb-1 border-b-2 border-slate-200 flex-shrink-0"> <!-- Adjusted padding -->
-        <div class="container mx-auto max-w-7xl">
-            <ul class="flex flex-wrap -mb-px space-x-4 justify-center sm:justify-start"> <!-- Adjusted space-x -->
-                <li><a href="#about" class="nav-link inline-block p-3 font-bold text-base sm:text-lg">About Me</a></li> <!-- Adjusted padding and font size -->
-                <li><a href="#experience" class="nav-link inline-block p-3 font-bold text-base sm:text-lg">Experience</a></li>
-                <li><a href="#skills" class="nav-link inline-block p-3 font-bold text-base sm:text-lg">Skills</a></li>
-                <li><a href="#education" class="nav-link inline-block p-3 font-bold text-base sm:text-lg">Education</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Scrollable Main Content Area -->
-    <div id="scrollable-content-area" class="overflow-y-auto bg-white flex-grow pt-6"> <!-- Adjusted padding -->
-        <div class="container mx-auto p-3 sm:p-5 lg:p-6 max-w-7xl"> <!-- Adjusted padding -->
-            <main class="space-y-6"> <!-- Adjusted space-y -->
-                <!-- About Section -->
-                <section id="about" class="page-section visible">
-                    <h2 class="text-2xl font-bold text-slate-800 mb-3 sm:text-3xl">About Me</h2> <!-- Adjusted from text-3xl -->
-                    <p class="text-base leading-relaxed text-slate-700 sm:text-lg"> <!-- Adjusted from text-lg -->
-                        Highly accomplished and innovative AI & Full Stack Engineer with a strong background in Full Stack Development and 3+ years of experience specializing in Generative AI, AI Platform Development, and Conversational AI. Proven leader in designing, developing, and deploying cutting-edge AI solutions, with expertise in end-to-end project lifecycle management, team leadership, and advanced framework integration. Passionate about leveraging AI to drive business value and enhance user experiences.
-                    </p>
-                </section>
-
-                <!-- Experience Section -->
-                <section id="experience" class="page-section">
-                    <h2 class="text-2xl font-bold text-slate-800 mb-5 sm:text-3xl">Professional Experience</h2> <!-- Adjusted from text-3xl -->
-                    <div class="relative border-l-4 border-blue-300 ml-4 pl-3"> <!-- Adjusted ml and pl -->
-                        <!-- Item 1 -->
-                        <div class="mb-8 timeline-item"> <!-- Adjusted mb -->
-                            <div class="absolute w-7 h-7 bg-blue-600 rounded-full -left-[1.35rem] border-4 border-white shadow-md"></div> <!-- Adjusted size and left -->
-                            <div class="ml-3 p-3 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300 ease-in-out"> <!-- Adjusted ml and p -->
-                                <div class="cursor-pointer flex justify-between items-center">
-                                    <div>
-                                        <h3 class="text-lg font-bold text-slate-800 sm:text-xl">Senior Systems Engineer <span class="text-blue-600">| Applied AI Platform (Advanced Research Center)</span></h3> <!-- Adjusted from text-xl -->
-                                        <p class="text-sm text-slate-600 sm:text-base">Infosys | <span class="text-xs font-semibold text-slate-500 sm:text-sm">Feb. 2024 – Present</span></p> <!-- Updated start date -->
-                                    </div>
-                                    <svg class="h-5 w-5 text-blue-600 timeline-icon-rotate sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg> <!-- Adjusted size -->
-                                </div>
-                                <div class="details mt-1"> <!-- Adjusted mt -->
-                                    <ul class="list-disc list-inside space-y-1 text-slate-700 text-sm sm:text-base"> <!-- Adjusted space-y and text size -->
-                                        <li>Led the development and architecture of an Agent Studio, a versatile platform supporting both pro-code and low-code/no-code agent creation, real-time testing, deployment, and log monitoring (Loki, LLM traces) internal/external APIs.</li>
-                                        <li>Engineered and integrated complex workflow orchestration capabilities, enabling the creation of multi-agent and tool-based low-code solutions. Also worked on the architecture of the Database.</li> <!-- Added content from PDF -->
-                                        <li>Optimized deployment with Knative Service for agents and robust job scheduling, preventing system overload.</li> <!-- Updated content from PDF -->
-                                        <li>Drove project success through development, code reviews, demos, and architectural design.</li>
-                                    </ul>
-                                    <div class="mt-3 p-2 bg-slate-50 rounded-lg"> <!-- Adjusted mt and p -->
-                                        <h4 class="font-semibold text-slate-700 mb-1 text-sm sm:text-base">Key Technologies:</h4> <!-- Adjusted text size -->
-                                        <div class="flex flex-wrap gap-1"> <!-- Adjusted gap -->
-                                            <span class="skill-tag">Python</span>
-                                            <span class="skill-tag">Java</span>
-                                            <span class="skill-tag">Spring Boot</span>
-                                            <span class="skill-tag">Angular</span>
-                                            <span class="skill-tag">Generative AI Frameworks (LangChain, LangGraph, CrewAI, Google ADK, MCP)</span> <!-- Combined frameworks for conciseness -->
-                                            <span class="skill-tag">Kubernetes</span>
-                                            <span class="skill-tag">Knative Service</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Item 2 -->
-                        <div class="mb-8 timeline-item">
-                            <div class="absolute w-7 h-7 bg-blue-600 rounded-full -left-[1.35rem] border-4 border-white shadow-md"></div>
-                            <div class="ml-3 p-3 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300 ease-in-out">
-                                <div class="cursor-pointer flex justify-between items-center">
-                                    <div>
-                                        <h3 class="text-lg font-bold text-slate-800 sm:text-xl">Senior Systems Engineer <span class="text-blue-600">| Generative AI Service</span></h3>
-                                        <p class="text-sm text-slate-600 sm:text-base">Infosys | <span class="text-xs font-semibold text-slate-500 sm:text-sm">Feb. 2024 – Present</span></p> <!-- Updated start date to match Applied AI Platform -->
-                                    </div>
-                                    <svg class="h-5 w-5 text-blue-600 timeline-icon-rotate sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
-                                </div>
-                                <div class="details mt-1">
-                                    <ul class="list-disc list-inside space-y-1 text-slate-700 text-sm sm:text-base">
-                                        <li>Designed and developed an Agentic System with advanced RAG and Chain of Thought, ensuring real-time processing and data privacy.</li>
-                                        <li>Integrated the Agentic System with the Infosys Chatbot Platform, enhancing conversational intelligence.</li>
-                                        <li>Innovated and showcased two key applications at MWC and NVIDIA Summit 2024 (Interviewing Agent, ITSM Agent).</li>
-                                    </ul>
-                                    <div class="mt-3 p-2 bg-slate-50 rounded-lg">
-                                        <h4 class="font-semibold text-slate-700 mb-1 text-sm sm:text-base">Key Technologies:</h4>
-                                        <div class="flex flex-wrap gap-1">
-                                            <span class="skill-tag">Python</span>
-                                            <span class="skill-tag">Streamlit</span>
-                                            <span class="skill-tag">Generative AI Frameworks (LangChain, LangGraph, CrewAI)</span>
-                                            <span class="skill-tag">SpringBoot</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Item 3 -->
-                        <div class="mb-8 timeline-item">
-                            <div class="absolute w-7 h-7 bg-blue-600 rounded-full -left-[1.35rem] border-4 border-white shadow-md"></div>
-                            <div class="ml-3 p-3 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300 ease-in-out">
-                                <div class="cursor-pointer flex justify-between items-center">
-                                    <div>
-                                        <h3 class="text-lg font-bold text-slate-800 sm:text-xl">Systems Engineer</h3>
-                                        <p class="text-md text-slate-600">Infosys | <span class="text-xs font-semibold text-slate-500 sm:text-sm">Feb. 2022 – Feb. 2024</span></p> <!-- Dates from PDF -->
-                                    </div>
-                                    <svg class="h-5 w-5 text-blue-600 timeline-icon-rotate sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
-                                </div>
-                                <div class="details mt-1">
-                                    <ul class="list-disc list-inside space-y-1 text-slate-700 text-sm sm:text-base">
-                                        <li><b>Infosys Chatbot Platform:</b> Worked with a cross-functional team to successfully integrate Generative AI functionalities, including document-based query processing and image analysis, achieving a processing time of 30-40 seconds for a normal 1-page document.</li> <!-- Updated content from PDF -->
-                                        <li><b>Infosys Conversational AI Suite:</b> Implemented OAuth 2.0 with OpenID Connect (OIDC) Authentication via Keycloak, enhancing platform security.</li> <!-- Updated content from PDF -->
-                                        <li><b>Conversational Testing Platform:</b> Developed automated Test-Suite creation module via RESTful APIs, significantly reducing resource needs and enabling generation of hundreds of thousands of test suites in 4-5 minutes. Managed and optimized underlying database structures to support rapid test suite generation.</li> <!-- Updated content from PDF -->
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Skills Section -->
-                <section id="skills" class="page-section">
-                    <h2 class="text-2xl font-bold text-slate-800 mb-5 sm:text-3xl">Technical Skills</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6"> <!-- Adjusted gap -->
-                        <div class="bg-white p-4 rounded-lg shadow-inner border border-slate-100"> <!-- Adjusted padding -->
-                            <h3 class="text-lg font-bold text-slate-800 mb-3 sm:text-xl">Languages</h3> <!-- Adjusted text size and mb -->
-                            <div class="flex flex-wrap gap-2"> <!-- Adjusted gap -->
-                                <span class="skill-tag">Python</span>
-                                <span class="skill-tag">Java</span>
-                                <span class="skill-tag">HTML</span>
-                                <span class="skill-tag">CSS</span>
-                                <span class="skill-tag">SCSS</span>
-                                <span class="skill-tag">Typescript</span>
-                            </div>
-
-                            <h3 class="text-lg font-bold text-slate-800 mb-3 mt-6 sm:text-xl">Frameworks & Databases</h3> <!-- Adjusted text size and mb/mt -->
-                            <div class="flex flex-wrap gap-2"> <!-- Adjusted gap -->
-                                <span class="skill-tag">Spring Boot</span>
-                                <span class="skill-tag">Angular</span>
-                                <span class="skill-tag">LangChain</span>
-                                <span class="skill-tag">LangGraph</span>
-                                <span class="skill-tag">CrewAI</span>
-                                <span class="skill-tag">Google ADK</span>
-                                <span class="skill-tag">MCP</span>
-                                <span class="skill-tag">GraphRAG</span> <!-- Added GraphRAG -->
-                                <span class="skill-tag">Kubernetes</span>
-                                <span class="skill-tag">Knative Service</span>
-                                <span class="skill-tag">Loki</span>
-                                <span class="skill-tag">Streamlit</span>
-                                <span class="skill-tag">PostgresSQL</span> <!-- Consistent casing with PDF -->
-                                <span class="skill-tag">chromadb</span> <!-- Added chromadb -->
-                                <span class="skill-tag">sqllite</span> <!-- Added sqllite -->
-                                <span class="skill-tag">reddis</span> <!-- Added reddis -->
-                            </div>
-
-                            <h3 class="text-lg font-bold text-slate-800 mb-3 mt-6 sm:text-xl">Development Practices & Tools</h3> <!-- Adjusted text size and mb/mt -->
-                            <div class="flex flex-wrap gap-2"> <!-- Adjusted gap -->
-                                <span class="skill-tag">Microservices</span>
-                                <span class="skill-tag">REST APIs</span>
-                                <span class="skill-tag">OAuth 2.0</span>
-                                <span class="skill-tag">OpenID Connect (OIDC)</span>
-                                <span class="skill-tag">Git</span>
-                                <span class="skill-tag">Docker</span>
-                                <span class="skill-tag">System Design</span>
-                                <span class="skill-tag">Agile/Scrum</span> <!-- Retained as good practice keyword -->
-                            </div>
-                        </div>
-                        <div class="bg-white p-4 rounded-lg shadow-inner border border-slate-100 flex flex-col"> <!-- Adjusted padding -->
-                            <h3 class="text-lg font-bold text-slate-800 mb-3 sm:text-xl">Key Skill Experience</h3> <!-- Adjusted text size and mb -->
-                            <div class="chart-container flex-grow">
-                                <canvas id="skillsChart"></canvas>
-                            </div>
-                            <p class="text-xs text-slate-500 mt-3 text-center sm:text-sm">Quantifying my hands-on experience and familiarity with core technologies.</p> <!-- Adjusted text size and mt -->
-                        </div>
-                    </div>
-                </section>
-                
-                <!-- Education Section -->
-                <section id="education" class="page-section">
-                    <h2 class="text-2xl font-bold text-slate-800 mb-5 sm:text-3xl">Education</h2> <!-- Adjusted from text-3xl -->
-                    <div class="bg-white p-4 rounded-lg shadow-inner border border-slate-100"> <!-- Adjusted padding -->
-                        <h3 class="text-lg font-bold text-blue-700 sm:text-xl">Bachelor of Technology in Computer Science and Engineering</h3> <!-- Adjusted from text-xl -->
-                        <p class="text-sm text-slate-700 mt-1 sm:text-base">SRMS College of Engineering Technology and Research, Bareilly, Uttar Pradesh</p> <!-- Adjusted text size -->
-                        <p class="text-xs text-slate-500 mt-1 sm:text-sm">May. 2017 – May. 2021</p> <!-- Dates from PDF -->
-                    </div>
-                </section>
-            </main>
         </div>
     </div>
 
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <a href="#" id="menu-phone"><i class="fas fa-phone-alt"></i></a>
+        <a href="#" id="menu-email"><i class="fas fa-envelope"></i></a>
+        <a href="#" id="menu-linkedin" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" id="menu-github" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="#" id="menu-location" target="_blank"><i class="fas fa-map-marker-alt"></i></a>
+        <a href="Shubham Sharma Resume.pdf" download><i class="fas fa-download"></i></a>
+    </div>
+
     <script>
+        // Add smooth scrolling and animations
         document.addEventListener('DOMContentLoaded', function() {
-            const navLinks = document.querySelectorAll('.nav-link');
-            const pageSections = document.querySelectorAll('.page-section');
-            const timelineItems = document.querySelectorAll('.timeline-item .cursor-pointer');
-            const scrollableContentArea = document.getElementById('scrollable-content-area');
-
-            // Function to add 'visible' class when section is in view within the scrollable area
-            const sectionVisibilityObserver = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    } else {
-                        entry.target.classList.remove('visible'); 
-                    }
+            // Add hover effects to experience items
+            const experienceItems = document.querySelectorAll('.experience-item');
+            experienceItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
                 });
-            }, { 
-                root: scrollableContentArea, // Observe within the custom scroll area
-                threshold: 0.1 // Trigger when 10% of the section is visible
+                item.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
             });
 
-            // Observe each section
-            pageSections.forEach(section => {
-                sectionVisibilityObserver.observe(section);
-            });
-
-            // Smooth scrolling for navigation links
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement && scrollableContentArea) {
-                        const targetOffset = targetElement.offsetTop - scrollableContentArea.offsetTop;
-                        scrollableContentArea.scrollTo({
-                            top: targetOffset,
-                            behavior: 'smooth'
+            // Add click-to-copy functionality for contact info
+            const contactItems = document.querySelectorAll('.contact-item');
+            contactItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const text = this.textContent.trim();
+                    if (navigator.clipboard && text.includes('@') || text.includes('+91')) {
+                        navigator.clipboard.writeText(text).then(() => {
+                            // Show copied feedback
+                            const original = this.innerHTML;
+                            this.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                            setTimeout(() => {
+                                this.innerHTML = original;
+                            }, 2000);
                         });
                     }
                 });
             });
 
-            // Update nav link active state based on scroll position (ScrollSpy like behavior)
-            const sectionActiveObserver = new IntersectionObserver(entries => {
+            // Intersection Observer for animation triggers
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    const id = entry.target.getAttribute('id');
-                    const navLink = document.querySelector(`.nav-link[href="#${id}"]`);
-                    if (navLink) {
-                        if (entry.isIntersecting && entry.intersectionRatio >= 0.5) { // When at least 50% of section is visible
-                            navLinks.forEach(link => link.classList.remove('active'));
-                            navLink.classList.add('active');
-                        }
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
                     }
                 });
-            }, { 
-                root: scrollableContentArea, // Observe within the custom scroll area
-                threshold: 0.5 // Trigger when 50% of the section is visible
+            }, observerOptions);
+
+            // Observe all sections
+            document.querySelectorAll('.section').forEach(section => {
+                observer.observe(section);
             });
 
-            pageSections.forEach(section => {
-                sectionActiveObserver.observe(section);
+            // Load personal details dynamically
+            document.getElementById("name").textContent = PERSONAL_DETAILS.name;
+            document.getElementById("title").textContent = PERSONAL_DETAILS.title;
+
+            const phoneElement = document.getElementById("phone");
+            phoneElement.href = `tel:${PERSONAL_DETAILS.phone}`;
+            phoneElement.querySelector("span").textContent = PERSONAL_DETAILS.phone;
+
+            const emailElement = document.getElementById("email");
+            emailElement.href = `mailto:${PERSONAL_DETAILS.email}`;
+            emailElement.querySelector("span").textContent = PERSONAL_DETAILS.email;
+
+            const linkedinElement = document.getElementById("linkedin");
+            linkedinElement.href = PERSONAL_DETAILS.linkedin;
+
+            const githubElement = document.getElementById("github");
+            githubElement.href = PERSONAL_DETAILS.github;
+
+            const locationElement = document.getElementById("location");
+            locationElement.href = PERSONAL_DETAILS.locationMap;
+            locationElement.querySelector("span").textContent = PERSONAL_DETAILS.location;
+
+            // Load personal details dynamically for the mobile menu
+            document.getElementById("menu-phone").href = `tel:${PERSONAL_DETAILS.phone}`;
+            document.getElementById("menu-email").href = `mailto:${PERSONAL_DETAILS.email}`;
+            document.getElementById("menu-linkedin").href = PERSONAL_DETAILS.linkedin;
+            document.getElementById("menu-github").href = PERSONAL_DETAILS.github;
+            document.getElementById("menu-location").href = PERSONAL_DETAILS.locationMap;
+
+            // Load Git Repositories dynamically
+            const gitRepositoriesContainer = document.getElementById("git-repositories");
+            PERSONAL_DETAILS.gitRepositories.forEach(repo => {
+                const repoElement = document.createElement("li");
+                repoElement.innerHTML = `
+                    <strong>${repo.name}</strong> - <a href="${repo.link}" target="_blank">GitHub Link</a>
+                    <p>${repo.description}</p>
+                `;
+                gitRepositoriesContainer.appendChild(repoElement);
             });
 
-
-            // Timeline item expand/collapse
-            timelineItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    const parentTimelineItem = this.closest('.timeline-item');
-                    parentTimelineItem.classList.toggle('open');
-                });
+            // Load Certifications dynamically
+            const certificationsContainer = document.getElementById("certifications");
+            PERSONAL_DETAILS.certifications.forEach(cert => {
+                const certElement = document.createElement("li");
+                certElement.innerHTML = `
+                    <strong>${cert.name}</strong>
+                    ${cert.link ? `- <a href="${cert.link}" target="_blank">View Certification</a>` : ""}
+                    ${cert.description ? `<p>${cert.description}</p>` : ""}
+                `;
+                certificationsContainer.appendChild(certElement);
             });
-
-            // Chart.js implementation
-            const ctx = document.getElementById('skillsChart');
-            if(ctx) {
-                new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Python', 'Java', 'GenAI Frameworks', 'Spring Boot', 'Kubernetes', 'Angular', 'HTML/CSS/TS', 'Databases'],
-                        datasets: [{
-                            label: 'Experience (Years)',
-                            data: [3.5, 3.5, 2.5, 3, 2.5, 2, 3, 2], // Adjusted/added data points for new categories
-                            backgroundColor: 'rgba(37, 99, 235, 0.7)', /* blue-600 with opacity */
-                            borderColor: 'rgba(37, 99, 235, 1)',
-                            borderWidth: 1,
-                            borderRadius: 4, /* Rounded bars */
-                        }]
-                    },
-                    options: {
-                        indexAxis: 'y',
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                display: false
-                            },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        let label = context.dataset.label || '';
-                                        if (label) {
-                                            label += ': ';
-                                        }
-                                        if (context.parsed.x !== null) {
-                                            label += context.parsed.x + ' years';
-                                        }
-                                        return label;
-                                    }
-                                },
-                                backgroundColor: '#1e293b', /* slate-900 for tooltip */
-                                titleColor: '#ffffff',
-                                bodyColor: '#ffffff',
-                                borderColor: '#2563eb',
-                                borderWidth: 1,
-                                borderRadius: 6,
-                            }
-                        },
-                        scales: {
-                            x: {
-                                beginAtZero: true,
-                                max: 4, /* Set a reasonable max value for skills chart */
-                                grid: {
-                                    color: 'rgba(203, 213, 225, 0.5)', /* slate-300 with opacity */
-                                },
-                                ticks: {
-                                    color: '#475569', /* slate-700 */
-                                    font: {
-                                        size: 12, /* Adjusted from 14 */
-                                    }
-                                }
-                            },
-                            y: {
-                                grid: {
-                                    display: false,
-                                },
-                                ticks: {
-                                    color: '#475569', /* slate-700 */
-                                    font: {
-                                        size: 12, /* Adjusted from 14 */
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
-            }
         });
+
+        // Print functionality
+        function downloadResume() {
+            window.print();
+        }
     </script>
 </body>
 </html>
